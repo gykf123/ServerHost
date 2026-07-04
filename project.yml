@@ -1,0 +1,52 @@
+name: ServerHost
+options:
+  bundleIdPrefix: com.serverhost
+  deploymentTarget:
+    iOS: "15.0"
+  createIntermediateGroups: true
+  generateEmptyDirectories: true
+
+settings:
+  base:
+    ARCHS: arm64
+    TARGETED_DEVICE_FAMILY: "2"
+    CLANG_CXX_LANGUAGE_STANDARD: "c++17"
+    CLANG_CXX_LIBRARY: "libc++"
+    GCC_C_LANGUAGE_STANDARD: gnu17
+    GCC_CXX_LANGUAGE_STANDARD: gnu++17
+    OTHER_LDFLAGS: -ObjC
+    SWIFT_VERSION: "5.0"
+    ENABLE_BITCODE: NO
+    CODE_SIGNING_ALLOWED: NO
+    CODE_SIGNING_REQUIRED: NO
+
+targets:
+  ServerHost:
+    type: application
+    platform: iOS
+    deploymentTarget: "15.0"
+    sources:
+      - path: main.mm
+      - path: httplib.h
+    info:
+      path: Info.plist
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.serverhost.demo
+        PRODUCT_NAME: ServerHost
+        ARCHS: arm64
+        TARGETED_DEVICE_FAMILY: "2"
+        CODE_SIGNING_ALLOWED: NO
+        CODE_SIGNING_REQUIRED: NO
+        CODE_SIGN_IDENTITY: ""
+        DEVELOPMENT_TEAM: ""
+        ENABLE_BITCODE: NO
+        CLANG_CXX_LANGUAGE_STANDARD: "c++17"
+        CLANG_CXX_LIBRARY: "libc++"
+        GCC_CXX_LANGUAGE_STANDARD: gnu++17
+        OTHER_LDFLAGS: -ObjC
+        HEADER_SEARCH_PATHS: "$(SRCROOT)"
+    dependencies:
+      - sdk: AVFoundation.framework
+      - sdk: AudioToolbox.framework
+      - sdk: UniformTypeIdentifiers.framework

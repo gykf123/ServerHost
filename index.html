@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iPad 6 C++ Server</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Server is running</h1>
+    <p>当前时间：<span id="clock">--:--:--</span></p>
+    <button onclick="testPing()">测试 /ping 接口</button>
+    <p id="pingResult" style="margin-top: 20px;"></p>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('clock').textContent =
+                now.toLocaleTimeString('zh-CN', { hour12: false });
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        function testPing() {
+            const result = document.getElementById('pingResult');
+            result.textContent = '请求中...';
+            fetch('/ping')
+                .then(r => r.text())
+                .then(text => {
+                    result.textContent = '响应: ' + text + ' ✅';
+                    result.style.color = 'green';
+                })
+                .catch(err => {
+                    result.textContent = '错误: ' + err + ' ❌';
+                    result.style.color = 'red';
+                });
+        }
+    </script>
+</body>
+</html>
