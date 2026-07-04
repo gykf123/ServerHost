@@ -47,6 +47,8 @@ targets:
         OTHER_LDFLAGS: -ObjC
         HEADER_SEARCH_PATHS: "$(SRCROOT)"
     dependencies:
+      - sdk: UIKit.framework
       - sdk: AVFoundation.framework
       - sdk: AudioToolbox.framework
       - sdk: UniformTypeIdentifiers.framework
+      - sdk: Foundation.framework
