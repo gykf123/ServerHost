@@ -28,6 +28,7 @@ jobs:
 
       - name: Build & Archive
         run: |
+          set +e
           xcodebuild archive \
             -project ServerHost.xcodeproj \
             -scheme ServerHost \
@@ -38,7 +39,14 @@ jobs:
             CODE_SIGN_IDENTITY="" \
             DEVELOPMENT_TEAM="" \
             ARCHS=arm64 \
-            | tee build/archive.log
+            2>&1 | tee build/archive.log
+          if [ -d "build/ServerHost.xcarchive" ]; then
+            echo "ARCHIVE OK"
+            exit 0
+          else
+            echo "ARCHIVE FAILED"
+            exit 1
+          fi
 
       - name: Package IPA (unsigned)
         run: |
