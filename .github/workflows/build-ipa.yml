@@ -16,7 +16,8 @@ jobs:
 
       - name: Select Xcode
         run: |
-          sudo xcode-select -s /Applications/Xcode_*.app
+          ls /Applications/Xcode*.app
+          sudo xcode-select -s "$(ls -d /Applications/Xcode*.app | head -1)"
           xcodebuild -version
 
       - name: Install xcodegen
